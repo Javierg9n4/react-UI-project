@@ -11,27 +11,41 @@ import {
 import {
   TableAllUsers,
   loader as allUsersLoader,
+  action as deleteUserAction,
 } from "../components/Users/TableAllUsers";
-import { action as deleteUserAction } from "../components/Users/DeleteUserAction";
 import {
   TableAllTeachers,
   loader as allTeachersLoader,
+  action as deleteTeacherAction,
 } from "../components/Teachers/TableAllTeachers";
-import { action as deleteTeacherAction } from "../components/Teachers/DeleteTeacherAction";
 import {
   TableAllStudents,
   loader as allStudentsLoader,
+  action as deleteStudentAdminAction,
 } from "../components/Students/TableAllStudents";
-import { action as deleteStudentAdminAction } from "../components/Students/DeleteStudentAdminAction";
 import {
   TableStudentsByTeacherId,
   loader as StudentsByTeacherIdLoader,
+  action as deleteStudentAction,
 } from "../components/Students/TableStudentsByTeacherId";
-import { action as deleteStudentAction } from "../components/Students/DeleteStudentAction";
-import NewStudentForm from "../components/NewStudentFrom/NewStudentFrom";
-import { action as addStudentAction } from "../components/NewStudentFrom/AddStudent";
+import {
+  NewStudentForm,
+  action as addStudentAction,
+} from "../components/Students/NewStudentFrom";
+import {
+  SignupForm,
+  action as createUserAndTeacherAction,
+} from "../components/Signup/Signup";
 
 const router = createBrowserRouter([
+  {
+    path: "/signup",
+    element: <SignupForm />,
+  },
+  {
+    path: "/signup/createuser",
+    action: createUserAndTeacherAction,
+  },
   {
     path: "/",
     element: <Layout />,

@@ -1,25 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-
-const loginUser = async (credentials) => {
-  try {
-    const resp = await fetch("http://localhost:4000/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-      mode: "cors",
-    });
-
-    const data = await resp.json();
-
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { useNavigate, NavLink } from "react-router-dom";
+import { loginUser } from "../../repository/userRepository";
+import "./Login.css";
 
 const Login = ({ setToken }) => {
   const [username, setUserName] = useState("");
@@ -38,7 +21,7 @@ const Login = ({ setToken }) => {
   };
 
   return (
-    <div className="login-wrapper">
+    <div className="loginContainer">
       <h1>Plese Login</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -56,7 +39,10 @@ const Login = ({ setToken }) => {
           />
         </label>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit">Login</button>
+          <button>
+            <NavLink to="/signup">Signup</NavLink>
+          </button>
         </div>
       </form>
     </div>

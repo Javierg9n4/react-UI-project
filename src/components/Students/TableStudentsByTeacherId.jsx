@@ -1,17 +1,42 @@
 import React from "react";
-import { useLoaderData, NavLink } from "react-router-dom";
+import { useLoaderData, NavLink, redirect } from "react-router-dom";
 import TableStudents from "./TableStudentsSkeleton";
 import getToken from "../../utils/getToken";
 import jwt_decode from "jwt-decode";
-import { getStudentsByTeacherId } from "../../repository/studentRepository";
+import {
+  getStudentsByTeacherId,
+  deleteStudent,
+} from "../../repository/studentRepository";
+import { getUserById } from "../../repository/userRepository";
+import "./TableStudents.css";
 
 const loader = async () => {
   const token = getToken();
   const decodedToken = await jwt_decode(token);
+  const userId = await decodedToken.user.id;
+  const userData = await getUserById(userId, token);
+  //console.log(userData);
+  const teacherId = await userData.teacher.id;
 
-  const teacherId = decodedToken.user.id;
+  const students = await getStudentsByTeacherId(teacherId, token);
 
-  return await getStudentsByTeacherId(teacherId, token);
+  if (students === []) {
+    return null;
+  } else {
+    return students;
+  }
+};
+
+const action = async ({ request }) => {
+  const token = await getToken();
+
+  const formData = await request.formData();
+
+  const studentId = formData.get("studentId");
+
+  await deleteStudent(studentId, token);
+
+  return redirect("/yourstudents");
 };
 
 const TableStudentsByTeacherId = () => {
@@ -28,6 +53,7 @@ const TableStudentsByTeacherId = () => {
           </button>
         </div>
       )}
+      {/* esto no me funciona */}
       {!students && (
         <div>
           <p>Este profesor aun no tiene alumnos asociados</p>
@@ -36,4 +62,4 @@ const TableStudentsByTeacherId = () => {
     </>
   );
 };
-export { TableStudentsByTeacherId, loader };
+export { TableStudentsByTeacherId, loader, action };

@@ -3,26 +3,14 @@ import { useLoaderData } from "react-router-dom";
 import getToken from "../../utils/getToken";
 import jwt_decode from "jwt-decode";
 import "./Profile.css";
+import { getUserById } from "../../repository/userRepository";
 
 const loader = async () => {
   const token = await getToken();
   const decodedToken = await jwt_decode(token);
   const userId = decodedToken.user.id;
-  try {
-    const resp = await fetch(`http://localhost:4000/api/user/${userId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      mode: "cors",
-    });
-
-    const data = await resp.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  const userById = getUserById(userId, token);
+  return userById;
 };
 const Profile = () => {
   const userProfile = useLoaderData();

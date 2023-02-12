@@ -1,5 +1,6 @@
 import React from "react";
 import { Form } from "react-router-dom";
+import "./TableAllUsers.css";
 
 const TableHeaderUsers = () => {
   return (

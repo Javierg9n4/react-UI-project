@@ -1,16 +1,15 @@
-.loginContainer {
+.newStudentFormContainer {
   border: 1px solid rgb(124, 124, 124);
   border-radius: 5px;
   width: fit-content;
-  margin: 2em auto 0 auto;
+  margin: 0 auto 0 auto;
   padding: 1em 3em;
   height: fit-content;
   background-color: rgb(75, 168, 255);
 }
 
 input {
-  margin: 0 auto 0 auto;
-  height: fit-content;
+  margin: 2em auto 0 auto;
 
 }
 
@@ -26,14 +25,9 @@ form {
 
 h1 {
   width: fit-content;
-  margin: 0 auto 0 auto;
+  margin: auto auto 0 auto;
 }
 
 p {
-  margin-top: 0;
-}
-
-label {
-  margin-top: 0;
-  height: fit-content;
+  margin-top: 2em;
 }

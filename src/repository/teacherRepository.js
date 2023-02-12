@@ -15,7 +15,8 @@ const getAllTeachers = async (userId, token) => {
     const filteredTeachers = teachers.filter((teacher) => {
       return teacher.user_id !== userId;
     });
-    console.log(filteredTeachers);
+    //console.log(filteredTeachers);
+
     return filteredTeachers;
   } catch (error) {
     console.log(error);
@@ -37,8 +38,9 @@ const deleteTeacher = async (teacherId, token) => {
     );
 
     const success = await response.json();
-    console.log(success);
+    //console.log(success);
     alert(success.message);
+
     return success;
   } catch (error) {
     console.log(error);

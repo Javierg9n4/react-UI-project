@@ -1,8 +1,8 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, redirect } from "react-router-dom";
 import TableUsers from "./TableUsersSkeleton";
 import getToken from "../../utils/getToken";
-import { getAllUsers } from "../../repository/userRepository";
+import { getAllUsers, deleteUser } from "../../repository/userRepository";
 import jwt_decode from "jwt-decode";
 
 const loader = async () => {
@@ -12,8 +12,20 @@ const loader = async () => {
   const userId = decodedToken.user.id;
 
   const allUsers = await getAllUsers(token, userId);
-
+  //console.log(allUsers);
   return allUsers;
+};
+
+const action = async ({ request }) => {
+  const token = await getToken();
+
+  const formData = await request.formData();
+
+  const userId = formData.get("userId");
+
+  await deleteUser(userId, token);
+
+  return redirect("/users");
 };
 
 const TableAllUsers = () => {
@@ -27,4 +39,4 @@ const TableAllUsers = () => {
   );
 };
 
-export { TableAllUsers, loader };
+export { TableAllUsers, loader, action };

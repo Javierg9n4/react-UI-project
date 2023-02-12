@@ -1,4 +1,4 @@
-.loginContainer {
+.signupContainer {
   border: 1px solid rgb(124, 124, 124);
   border-radius: 5px;
   width: fit-content;
@@ -9,8 +9,7 @@
 }
 
 input {
-  margin: 0 auto 0 auto;
-  height: fit-content;
+  margin: 1em auto 0 auto;
 
 }
 
@@ -27,13 +26,4 @@ form {
 h1 {
   width: fit-content;
   margin: 0 auto 0 auto;
-}
-
-p {
-  margin-top: 0;
-}
-
-label {
-  margin-top: 0;
-  height: fit-content;
 }
